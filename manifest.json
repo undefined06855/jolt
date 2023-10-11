@@ -1,0 +1,28 @@
+{
+    "name": "Jolt API",
+    "version": "0.0.1",
+    "description": "The chrome extension for the Jolt API for Super Spark Maker.",
+    "manifest_version": 3,
+    "author": "undefined06855",
+
+    "permissions": [
+        "declarativeNetRequest"
+    ],
+
+    "declarative_net_request": {
+        "rule_resources": [{
+            "id": "ruleset_1",
+            "enabled": true,
+            "path": "blocker.json"
+        }]
+    },
+
+    "host_permissions": [
+        "https://www.supersparkmaker.com/*"
+    ],
+
+    "content_scripts": [{
+        "js": ["ssm.js", "script.js"],
+        "matches": ["https://www.supersparkmaker.com/*"]
+    }]
+}

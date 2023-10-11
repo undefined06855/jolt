@@ -1,0 +1,14 @@
+[
+    {
+        "id" : 1,
+        "priority": 1,
+        "action": {
+            "type": "redirect",
+            "redirect": { "url": "https://www.supersparkmaker.com/themes/supersparkmaker/views/games/superSparkMaker/013/js/spark.js" }
+        },
+        "condition": {
+            "urlFilter": "https://www.supersparkmaker.com/themes/supersparkmaker/views/games/superSparkMaker/013/js/spark.min.js*",
+            "resourceTypes": ["script"]
+        }
+    }      
+]
