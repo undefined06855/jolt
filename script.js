@@ -9,6 +9,12 @@ function jEmbedEditorUI()
     {
         log("In editor - appending UI")
 
+        let transferElement = document.createElement("div")
+        transferElement.style.display = "none"
+        transferElement.id = "jTransferElement"
+        document.body.appendChild(transferElement)
+
+
         let a = document.createElement("a")
         a.classList.add("button", "hover-zoom105", "brad5", "jolt-insert-js")
 
@@ -32,8 +38,11 @@ function jEmbedEditorUI()
             log("Clicked insert javascript btn")
 
             jInsertCustomJavascript(textarea.value)
-
         })
+
+        // workaround for not being able to see window.level from chrome extension
+        // add window.level data to DOM
+        button.setAttribute("onclick", "document.querySelector('#jTransferElement').innerHTML = JSON.stringify(window.level)")
 
         a.appendChild(button)
 
@@ -52,15 +61,22 @@ function jPollJoltEditorUI()
 // called when you press the "inject javascript" button
 function jInsertCustomJavascript(js)
 {
-    let currentLvlGuid = window.location.pathname.replace("/", "") // dont convert to number - precision is lost
+    let i = setInterval(() => {
+        // poll if window.level is in DOM
+        if (document.querySelector("#jTransferElement").innerHTML != "")
+        {
+            // ready to go
+            clearInterval(i)
 
-    log("Injecting javascript\nguid=" + currentLvlGuid + "\njs=" + js)
+            let currentLvlGuid = window.location.pathname.replace("/", "") // dont convert to number - precision is lost
 
-    let s = document.createElement("script")
-    s.innerText = `
-    console.log(window.level)
-    `
-    document.body.appendChild(s)
+            log("Injecting javascript\nguid=" + currentLvlGuid + "\njs=" + js)
+
+            let level = JSON.parse(document.querySelector("#jTransferElement").innerHTML)
+
+            console.log(level)
+        }
+    }, 5) // shouldnt take too long
 }
 
 
