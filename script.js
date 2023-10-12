@@ -41,6 +41,7 @@ function jEmbedEditorUI()
     }
 }
 
+// tests if the ui is gone and if so add it to the dom again
 function jPollJoltEditorUI()
 {
     let joltEditorJSButton = document.querySelector(".jolt-insert-js")
@@ -48,17 +49,18 @@ function jPollJoltEditorUI()
         jEmbedEditorUI()
 }
 
+// called when you press the "inject javascript" button
 function jInsertCustomJavascript(js)
 {
-    // called when you press the "inject javascript" button
-    
-    let saveLvlPrefix = "https://www.supersparkmaker.com/levels/save/"
     let currentLvlGuid = window.location.pathname.replace("/", "") // dont convert to number - precision is lost
 
     log("Injecting javascript\nguid=" + currentLvlGuid + "\njs=" + js)
 
-
-    ssm.injectJavascript(js)
+    let s = document.createElement("script")
+    s.innerText = `
+    console.log(window.level)
+    `
+    document.body.appendChild(s)
 }
 
 
