@@ -22,7 +22,7 @@
     ],
 
     "content_scripts": [{
-        "js": ["script.js"],
+        "js": ["utils.js", "script.js"],
         "matches": ["https://www.supersparkmaker.com/*"]
     }]
 }
