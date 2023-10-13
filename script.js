@@ -132,7 +132,7 @@ function jMain()
         if (level.jolt)
         {
             // yes has scripts!
-            // prompt user if they want to enable them (also need button for onclick event)
+            // prompt user if they want to enable them (also need button for onclick event) edit: me from the future: I could use an image with an onerror to run code without user interaction, might have to implement that
             let promptElement = document.createElement("div")
             promptElement.style.top = "5px"
             promptElement.style.left = "5px"
